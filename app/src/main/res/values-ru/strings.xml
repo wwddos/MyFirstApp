@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">МоеПервоеПриложение</string>
+    <string name="main_text">Мое первое приложение</string>
+    <string name="student_info">Студент: Ваша Фамилия\nГруппа: Ваша группа</string>
+</resources>
