@@ -1,11 +1,12 @@
-  name: CI
+   name: CI
 
-  on:
+   on:
      push:
        branches: [ "main" ]
      pull_request:
        branches: [ "main" ]
-  jobs:
+
+   jobs:
      build:
        runs-on: ubuntu-20.04
        
