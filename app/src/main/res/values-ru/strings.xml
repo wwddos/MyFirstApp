@@ -3,4 +3,9 @@
     <string name="app_name">МоеПервоеПриложение</string>
     <string name="main_text">Мое первое приложение</string>
     <string name="student_info">Студент: Ваша Фамилия\nГруппа: Ваша группа</string>
+    <string name="avatar_description">Аватар автора</string>
+    <string name="menu_description">Меню</string>
+    <string name="like_description">Нравится</string>
+    <string name="share_description">Поделиться</string>
+    <string name="views_description">Просмотры</string>
 </resources>

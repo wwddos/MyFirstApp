@@ -2,4 +2,9 @@
     <string name="app_name">MyFirstApp</string>
     <string name="main_text">My First Application</string>
     <string name="student_info">Студент: Сотников\nГруппа: 3.2ИСИП-1</string>
+    <string name="avatar_description">Аватар автора</string>
+    <string name="menu_description">Меню</string>
+    <string name="like_description">Нравится</string>
+    <string name="share_description">Поделиться</string>
+    <string name="views_description">Просмотры</string>
 </resources>
