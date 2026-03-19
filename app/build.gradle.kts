@@ -7,6 +7,10 @@ android {
     namespace = "ru.vlad.myfirstapp"
     compileSdk {
         version = release(36)
+        buildFeatures {
+            viewBinding = true
+        }
+
     }
 
     defaultConfig {
