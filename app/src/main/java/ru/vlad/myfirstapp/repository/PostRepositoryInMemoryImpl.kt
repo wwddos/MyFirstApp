@@ -6,46 +6,86 @@ import ru.vlad.myfirstapp.dto.Post
 
 class PostRepositoryInMemoryImpl : PostRepository {
 
-    // Исходные данные
-    private var post = Post(
-        id = 1,
-        author = "Нетология. Университет интернет-профессий",
-        content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов.",
-        published = "21 мая в 18:36",
-        likedByMe = false,
-        likes = 999,
-        shares = 25,
-        views = 5700
+    private var posts = listOf(
+        Post(
+            id = 1,
+            author = "Нетология. Университет интернет-профессий",
+            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению.",
+            published = "21 мая в 18:36",
+            likedByMe = false,
+            likes = 999,
+            shares = 25,
+            views = 5700
+        ),
+        Post(
+            id = 2,
+            author = "Android Dev",
+            content = "Вышел новый релиз Android Studio! Теперь с поддержкой Gemini AI и улучшенным композером.",
+            published = "22 мая в 10:15",
+            likedByMe = false,
+            likes = 342,
+            shares = 89,
+            views = 2300
+        ),
+        Post(
+            id = 3,
+            author = "Kotlin Weekly",
+            content = "Kotlin 2.0.0 released! Что нового в языке? Смотрим обновления компилятора и стандартной библиотеки.",
+            published = "23 мая в 09:42",
+            likedByMe = true,
+            likes = 1250,
+            shares = 420,
+            views = 8900
+        ),
+        Post(
+            id = 4,
+            author = "Google I/O",
+            content = "Анонсированы новые возможности для разработчиков: Compose UI, Wear OS 5, Android 15 Beta",
+            published = "20 мая в 20:00",
+            likedByMe = false,
+            likes = 5678,
+            shares = 1234,
+            views = 45000
+        )
     )
-    // MutableLiveData, который можно изменять
-    private val _data = MutableLiveData(post)
 
-    // Внешний доступ только для чтения (LiveData, а не MutableLiveData)
-    override fun get(): LiveData<Post> = _data
+    private val _data = MutableLiveData(posts)
 
-    override fun like() {
-        // Меняем состояние лайка на противоположное
-        post = post.copy(
-            likedByMe = !post.likedByMe,
-            likes = if (post.likedByMe) post.likes - 1 else post.likes + 1
-        )
-        // Оповещаем подписчиков об изменении
-        _data.value = post
+    override fun getAll(): LiveData<List<Post>> = _data
+
+    override fun likeById(id: Long) {
+        posts = posts.map { post ->
+            if (post.id == id) {
+                post.copy(
+                    likedByMe = !post.likedByMe,
+                    likes = if (post.likedByMe) post.likes - 1 else post.likes + 1
+                )
+            } else {
+                post
+            }
+        }
+        _data.value = posts
     }
 
-    override fun share() {
-        post = post.copy(
-            shares = post.shares + 1
-        )
-        _data.value = post
+    override fun shareById(id: Long) {
+        posts = posts.map { post ->
+            if (post.id == id) {
+                post.copy(shares = post.shares + 1)
+            } else {
+                post
+            }
+        }
+        _data.value = posts
     }
-
-    override fun increaseViews() {
-        // Можно будет реализовать позже
-        post = post.copy(
-            views = post.views + 1
-        )
-        _data.value = post
+    override fun increaseViews(id: Long) {
+        posts = posts.map { post ->
+            if (post.id == id) {
+                post.copy(views = post.views + 1)
+            } else {
+                post
+            }
+        }
+        _data.value = posts
     }
 }
 
