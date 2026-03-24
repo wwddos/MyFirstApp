@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">MyFirstApp</string>
     <string name="main_text">My First Application</string>
-    <string name="student_info">Студент: Сотников\nГруппа: 3.2ИСИП-1</string>
-    <string name="avatar_description">Аватар автора</string>
-    <string name="menu_description">Меню</string>
-    <string name="like_description">Нравится</string>
-    <string name="share_description">Поделиться</string>
-    <string name="views_description">Просмотры</string>
+    <string name="student_info">Student: Sotnikov\nGroup: 3.2ИСИП-1</string>
+    <string name="avatar_description">Avatar</string>
+    <string name="menu_description">Menu</string>
+    <string name="like_description">Like</string>
+    <string name="share_description">Share</string>
+    <string name="views_description">Views</string>
+    <string name="edit_post">Edit</string>
+    <string name="remove_post">Delete</string>
+    <string name="post_hint">What news?</string>
+    <string name="save_post">Post</string>
+    <string name="cancel_edit_hint">Edit</string>
+    <string name="cancel_edit">Cancel</string>
 </resources>

@@ -7,20 +7,10 @@ android {
     namespace = "ru.vlad.myfirstapp"
     compileSdk {
         version = release(36)
-        buildFeatures {
-            viewBinding = true
-        }
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_1_8
-            targetCompatibility = JavaVersion.VERSION_1_8
-        }
-
-        kotlinOptions {
-            jvmTarget = "1.8"
-        }
-
+            }
+    buildFeatures {
+        viewBinding = true
     }
-
     defaultConfig {
         applicationId = "ru.vlad.myfirstapp"
         minSdk = 24
@@ -41,11 +31,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
 }
 

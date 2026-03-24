@@ -8,4 +8,10 @@
     <string name="like_description">Нравится</string>
     <string name="share_description">Поделиться</string>
     <string name="views_description">Просмотры</string>
+    <string name="edit_post">Редактировать</string>
+    <string name="remove_post">Удалить</string>
+    <string name="post_hint">Что у вас нового?</string>
+    <string name="save_post">Опубликовать</string>
+    <string name="cancel_edit_hint">Редактирование...</string>
+    <string name="cancel_edit">Отменить</string>
 </resources>
