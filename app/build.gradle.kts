@@ -55,4 +55,5 @@ dependencies {
     // Для viewModels delegation
     implementation("androidx.activity:activity-ktx:1.8.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("com.google.android.material:material:1.11.0")
 }

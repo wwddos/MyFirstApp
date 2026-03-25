@@ -10,4 +10,6 @@
     <color name="background_light">#FFFFF3E0</color>  <!-- Светло-оранжевый фон -->
     <color name="text_primary">#FF6200EE</color>    <!-- Фиолетовый для заголовка -->
     <color name="text_secondary">#FF757575</color>    <!-- Серый для информации -->
+    <color name="red_500">#FF0000</color>
+    <color name="gray_600">#FF757575</color>
 </resources>

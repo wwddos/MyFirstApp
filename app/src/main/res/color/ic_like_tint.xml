@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Состояние "нажато и выбрано" (для обратной связи) -->
+    <item android:color="@color/purple_700" android:state_pressed="true" android:state_checked="true" />
+    <!-- Состояние "нажато и не выбрано" -->
+    <item android:color="@color/purple_200" android:state_pressed="true" android:state_checked="false" />
+    <!-- Состояние "выбрано" (лайк поставлен) -->
+    <item android:color="@color/purple_500" android:state_checked="true" />
+    <!-- Состояние "по умолчанию" (лайк не поставлен) -->
+    <item android:color="@color/gray_600" />
+</selector>
