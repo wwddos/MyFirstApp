@@ -1,10 +1,12 @@
 package ru.vlad.myfirstapp
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import ru.vlad.myfirstapp.activity.EditPostContract
 import ru.vlad.myfirstapp.adapter.OnPostInteractionListener
 import ru.vlad.myfirstapp.adapter.PostsAdapter
 import ru.vlad.myfirstapp.databinding.ActivityMainBinding
@@ -25,21 +27,25 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onShare(post: Post) {
+                val shareIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+
+                // Создаем Chooser с заголовком
+                val chooserIntent =
+                    Intent.createChooser(shareIntent, getString(R.string.share_post_via))
+                startActivity(chooserIntent)
+
+                // Увеличиваем счетчик репостов
                 viewModel.shareById(post.id)
-                Toast.makeText(this@MainActivity, "Репост +1", Toast.LENGTH_SHORT).show()
             }
 
+
+
             override fun onEdit(post: Post) {
-
-                editingPostId = post.id
-
-                binding.content.setText(post.content)
-                binding.content.setSelection(binding.content.text.length)
-
-                binding.content.requestFocus()
-                showKeyboard(binding.content)
-
-                binding.cancelGroup.visibility = View.VISIBLE
+                editPostLauncher.launch(post.content)
             }
 
             override fun onRemove(post: Post) {
@@ -112,7 +118,18 @@ class MainActivity : AppCompatActivity() {
                 // Отменяем редактирование в ViewModel
                 viewModel.cancelEdit()
             }
+            binding.fab.setOnClickListener {
+                // Запускаем создание нового поста
+                editPostLauncher.launch(null)  // null означает создание нового
+            }
         }
+    private val editPostLauncher = registerForActivityResult(EditPostContract()) { result ->
+        if (!result.isNullOrBlank()) {
+            // Получен текст отредактированного/нового поста
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+    }
 
         private fun hideKeyboard(view: View) {
             val imm =
@@ -126,6 +143,8 @@ class MainActivity : AppCompatActivity() {
             imm.showSoftInput(view, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
         }
     }
+
+
 
 
 

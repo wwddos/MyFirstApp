@@ -13,4 +13,15 @@
     <string name="save_post">Post</string>
     <string name="cancel_edit_hint">Edit</string>
     <string name="cancel_edit">Cancel</string>
+    <string name="add_post">Add post</string>
+    <string name="edit_post_title">New post</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_post_edit_title">Edit post</string>
+    <string name="error_empty_content">Text is empty</string>
+    <string name="play_video">Play</string>
+    <string name="open_external">Open</string>
+    <string name="error_no_video_app">Error video</string>
+    <string name="error_cannot_open_video">Error open</string>
+    <string name="share_post_via">Share via...</string>
 </resources>

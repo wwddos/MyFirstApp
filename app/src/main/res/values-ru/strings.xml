@@ -14,4 +14,15 @@
     <string name="save_post">Опубликовать</string>
     <string name="cancel_edit_hint">Редактирование...</string>
     <string name="cancel_edit">Отменить</string>
+    <string name="add_post">Добавить пост</string>
+    <string name="edit_post_title">Новый пост</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="edit_post_edit_title">Редактировать пост</string>
+    <string name="error_empty_content">Текст не может быть пустым</string>
+    <string name="play_video">Воспроизвести видео</string>
+    <string name="open_external">Открыть во внешнем приложении</string>
+    <string name="error_no_video_app">Не найдено приложение для просмотра видео</string>
+    <string name="error_cannot_open_video">Не удалось открыть видео</string>
+    <string name="share_post_via">Поделиться через</string>
 </resources>
