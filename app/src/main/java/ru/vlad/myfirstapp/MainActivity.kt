@@ -86,17 +86,6 @@ class MainActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                // Если редактируем существующий пост
-                if (editingPostId != 0L) {
-                    // Получаем текущий пост из ViewModel, обновляем его контент и сохраняем
-                    viewModel.saveEditedPost(editingPostId, text)
-                    editingPostId = 0L
-                } else {
-                    // Создаем новый пост
-                    viewModel.changeContent(text)
-                    viewModel.save()
-                }
-
                 // Очищаем поле ввода
                 binding.content.text.clear()
                 // Скрываем панель отмены

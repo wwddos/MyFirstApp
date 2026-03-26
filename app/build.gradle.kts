@@ -58,4 +58,5 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.activity:activity-ktx:1.8.0")
     implementation("androidx.fragment:fragment-ktx:1.6.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 }
