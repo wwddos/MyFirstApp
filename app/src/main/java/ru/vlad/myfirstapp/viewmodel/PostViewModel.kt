@@ -1,28 +1,36 @@
 package ru.vlad.myfirstapp.viewmodel
 
-
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.vlad.myfirstapp.dto.Post
 import ru.vlad.myfirstapp.repository.PostRepository
-import ru.vlad.myfirstapp.repository.PostRepositoryFileImpl
-import ru.vlad.myfirstapp.repository.PostRepositoryInMemoryImpl
+import ru.vlad.myfirstapp.repository.PostRepositorySQLiteImpl
+import ru.vlad.myfirstapp.db.AppDb
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
 
-    // Используем файловую реализацию с передачей контекста приложения
-    private val repository: PostRepository = PostRepositoryFileImpl(application)
+    private val repository: PostRepository = PostRepositorySQLiteImpl(
+        AppDb.getInstance(application).postDao
+    )
 
     val data: LiveData<List<Post>> = repository.getAll()
 
     private val empty = Post(
         id = 0,
         author = "",
+        authorId = 0,
         content = "",
-        published = ""
+        published = "",
+        likedByMe = false,
+        likes = 0,
+        shares = 0,
+        views = 0,
+        video = null
     )
 
     private val _edited = MutableLiveData(empty)
@@ -44,6 +52,14 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
         _edited.value = empty
         _editingMode.value = false
+    }
+
+    fun saveEditedPost(postId: Long, newContent: String) {
+        val currentPosts = data.value
+        val updatedPost = currentPosts?.find { it.id == postId }?.copy(content = newContent)
+        if (updatedPost != null) {
+            repository.save(updatedPost)
+        }
     }
 
     fun edit(post: Post) {
