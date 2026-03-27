@@ -40,7 +40,11 @@ class PostViewHolder(
                 videoContainer.removeAllViews()
 
                 // Инфлейтим layout видео
-                val videoBinding = ItemVideoBinding.inflate(LayoutInflater.from(itemView.context), videoContainer, true)
+                val videoBinding = ItemVideoBinding.inflate(
+                    LayoutInflater.from(itemView.context),
+                    videoContainer,
+                    true
+                )
 
                 // Устанавливаем текст видео (можно показать короткую ссылку)
                 videoBinding.videoUrl.text = post.video
@@ -60,10 +64,33 @@ class PostViewHolder(
             menu.setOnClickListener { view ->
                 showPopupMenu(view, post)
             }
+            root.setOnClickListener {
+                listener.onPostClick(post)
+            }
+
+            // Обработчики для интерактивных элементов должны вызывать stopPropagation
+            // чтобы не срабатывал клик на root
+            like.setOnClickListener {
+                listener.onLike(post)
+                it.stopPropagation()  // предотвращаем всплытие события
+            }
+
+            share.setOnClickListener {
+                listener.onShare(post)
+                it.stopPropagation()
+            }
+
+            avatar.setOnClickListener {
+                listener.onAvatarClick(post)
+                it.stopPropagation()
+            }
+
+            menu.setOnClickListener { view ->
+                showPopupMenu(view, post)
+                // menu не должен вызывать onPostClick
+            }
         }
     }
-
-
 
     private fun showPopupMenu(anchor: View, post: Post) {
         PopupMenu(anchor.context, anchor).apply {
@@ -77,15 +104,38 @@ class PostViewHolder(
                         listener.onEdit(post)
                         true
                     }
+
                     R.id.remove -> {
                         listener.onRemove(post)
                         true
                     }
+
                     else -> false
                 }
             }
             show()
         }
+    }
+
+    private fun openVideo(videoUrl: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
+            // Проверяем, есть ли приложение, которое может обработать этот Intent
+            if (intent.resolveActivity(itemView.context.packageManager) != null) {
+                itemView.context.startActivity(intent)
+            } else {
+                Toast.makeText(itemView.context, R.string.error_no_video_app, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(itemView.context, R.string.error_cannot_open_video, Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    fun View.stopPropagation() {
+        isClickable = true
+        setOnClickListener { }
     }
 
     private fun formatCount(count: Int): String {
@@ -98,6 +148,7 @@ class PostViewHolder(
                     DecimalFormat(".").format(millions) + "M"
                 }
             }
+
             count >= 10_000 -> "${count / 1000}K"
             count >= 1_000 -> {
                 val thousands = count / 1000.0
@@ -107,23 +158,12 @@ class PostViewHolder(
                     DecimalFormat(".").format(thousands) + "K"
                 }
             }
+
             else -> count.toString()
         }
     }
-    private fun openVideo(videoUrl: String) {
-        try {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
-            // Проверяем, есть ли приложение, которое может обработать этот Intent
-            if (intent.resolveActivity(itemView.context.packageManager) != null) {
-                itemView.context.startActivity(intent)
-            } else {
-                Toast.makeText(itemView.context, R.string.error_no_video_app, Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: Exception) {
-            Toast.makeText(itemView.context, R.string.error_cannot_open_video, Toast.LENGTH_SHORT).show()
-        }
-    }
 }
+
 
 
 
